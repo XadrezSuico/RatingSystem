@@ -1,6 +1,6 @@
-@php($page = array("3"=>true,"301"=>true))
+@php($page = array("2"=>true,"202"=>true))
 @extends("system.default.default")
-@section("title","Configurar >> Modalidades")
+@section("title","Configurar >> Tipos de Rating")
 @section("css")
     <link href="{{url("/assets/css/table-responsive.css")}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{url("/assets/js/gritter/css/jquery.gritter.css")}}" />
@@ -31,13 +31,13 @@
 <div class="row mt">
   <div class="col-lg-12">
     <div class="form-panel">
-      <h4><i class="fa fa-angle-right"></i> Nova Modalidade</h4>
+      <h4><i class="fa fa-angle-right"></i> Editar Tipo de Rating: {{$type->name}}</h4>
       <form class="form-horizontal style-form" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="id" value="{{$type->id}}">
         @php(
           $fields=array(
-            array("Nome","name","Nome da Modalidades. Exemplo: Rápido.","text","",true),
-            array("Nome","abbr","Abreviação da Modalidades. Exemplo: RPD.","text","",true),
+            array("Nome","name","Nome do Tipo de Rating.","text",$type->name,true),
           )
         )
         @foreach($fields as $field)

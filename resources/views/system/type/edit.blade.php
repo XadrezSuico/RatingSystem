@@ -38,6 +38,7 @@
         @php(
           $fields=array(
             array("Nome","name","Nome da Modalidade. Exemplo: Rápido.","text",$type->name,true),
+            array("Abreviação","abbr","Abreviação da Modalidade. Exemplo: RPD.","text",$type->abbr,true),
           )
         )
         @foreach($fields as $field)

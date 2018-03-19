@@ -1,6 +1,6 @@
-@php($page = array("3"=>true,"302"=>true))
+@php($page = array("2"=>true,"202"=>true))
 @extends("system.default.default")
-@section("title","Configurar >> Modalidades")
+@section("title","Configurar >> Tipos de Rating")
 @section("css")
     <link href="{{url("/assets/css/table-responsive.css")}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{url("/assets/js/gritter/css/jquery.gritter.css")}}" />
@@ -28,14 +28,13 @@
 <div class="row mt">
   <div class="col-lg-12">
     <div class="content-panel">
-      <h4><i class="fa fa-angle-right"></i> Listar Modalidades</h4>
+      <h4><i class="fa fa-angle-right"></i> Listar Tipos de Rating</h4>
       <section id="no-more-tables">
         <table class="table table-bordered table-striped table-condensed cf">
           <thead class="cf">
             <tr>
               <th class="numeric">#</th>
               <th>Nome</th>
-              <th>Abreviação</th>
               <th width="20%">Opções</th>
             </tr>
           </thead>
@@ -44,9 +43,8 @@
               <tr>
                 <td data-title="Código" class="numeric">{{$type->id}}</td>
                 <td data-title="Nome">{{$type->name}}</td>
-                <td data-title="Abreviação">{{$type->abbr}}</td>
                 <td data-title="Opções">
-    							<a class="btn btn-warning btn-sm" href="{{url("/type/edit/".$type->id)}}">Editar</a>
+    							<a class="btn btn-warning btn-sm" href="{{url("/ratingType/edit/".$type->id)}}">Editar</a>
                   <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#lista_{{$type->id}}">
       						  Excluir
       						</button>
@@ -59,12 +57,11 @@
       						        <h4 class="modal-title" id="listaLabel_{{$type->id}}">Deseja mesmo excluir o registro?</h4>
       						      </div>
       						      <div class="modal-body">
-                          Nome: {{$type->name}}<br/>
-                          Abreviação: {{$type->abbr}}
+                          Nome: {{$type->name}}
       						      </div>
       						      <div class="modal-footer">
       						        <button type="button" class="btn btn-success" data-dismiss="modal">Não quero</button>
-      						        <a href="{{url("/type/delete/".$type->id)}}" class="btn btn-danger">Excluir</a>
+      						        <a href="{{url("/ratingType/delete/".$type->id)}}" class="btn btn-danger">Excluir</a>
       						      </div>
       						    </div>
       						  </div>

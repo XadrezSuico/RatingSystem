@@ -31,8 +31,8 @@
                     <span>Tipos de Rating</span>
                 </a>
                 <ul class="sub">
-                    <li><a @if(isset($page) && isset($page[201])) class="active"@endif href="calendar.html">Novo Tipo de Rating</a></li>
-                    <li><a @if(isset($page) && isset($page[202])) class="active"@endif href="gallery.html">Listar Tipos de Rating</a></li>
+                    <li><a @if(isset($page) && isset($page[201])) class="active"@endif href="{{url("/ratingtype/new")}}">Novo Tipo de Rating</a></li>
+                    <li><a @if(isset($page) && isset($page[202])) class="active"@endif href="{{url("/ratingtype")}}">Listar Tipos de Rating</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

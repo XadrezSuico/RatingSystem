@@ -19,6 +19,9 @@ class CreateRatingPersonTable extends Migration
             $table->foreign('person_id')->references('id')->on('person');
             $table->integer('type_id')->unsigned();
             $table->foreign('type_id')->references('id')->on('type');
+            $table->integer('ratingType_id')->unsigned();
+            $table->foreign('ratingType_id')->references('id')->on('ratingType');
+            $table->integer('rating');
             $table->timestamps();
         });
     }

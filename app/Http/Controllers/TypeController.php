@@ -21,13 +21,18 @@ class TypeController extends Controller
 
 
       $messages = [
-        'name.required' => 'O nome da Modalidade é necessário para efetuarmos o cadastro da federação.',
-        'name.between' => 'O nome precisa ter até 100 caracteres.'
+        'name.required' => 'O nome da modalidade é necessário para efetuarmos o cadastro da modalidade.',
+        'name.between' => 'O nome precisa ter até 100 caracteres.',
+
+        'abbr.required' => 'A abreviação é necessária para efetuarmos o cadastro da modalidade.',
+        'abbr.unique' => 'A abreviação informada já está vinculada a outro cadastro.',
+        'abbr.between' => 'A abreviação precisa ter até 5 caracteres.'
       ];
       // Faz a validação dos dados
       $requisicao = $request->all();
       $validator = \Validator::make($requisicao, [
-        'name' => 'required|string|max:100'
+        'name' => 'required|string|max:100',
+        'abbr' => 'required|string|max:5|unique:type,abbr'
       ], $messages);
       if($validator->fails()){
           return redirect()->back()->withErrors($validator->errors());
@@ -35,6 +40,7 @@ class TypeController extends Controller
 
       $type = new Type;
       $type->name = $requisicao["name"];
+      $type->abbr = $requisicao["abbr"];
       $type->save();
       $messageBag = new MessageBag;
       if($type->id > 0){
@@ -59,18 +65,29 @@ class TypeController extends Controller
       }
       $messages = [
         'name.required' => 'O nome da modalidade é necessária para efetuarmos o cadastro da modalidade.',
+        'abbr.required' => 'A abreviação é necessária para efetuarmos o cadastro da modalidade.',
+        'abbr.unique' => 'A abreviação informada já está vinculada a outro cadastro.',
+        'abbr.between' => 'A abreviação precisa ter até 5 caracteres.',
 
         'name.between' => 'O nome precisa ter até 100 caracteres.'
       ];
       // Faz a validação dos dados
       $requisicao = $request->all();
-      $validator = \Validator::make($requisicao, [
-            'name' => 'required|string|max:100'
-      ], $messages);
+      if($type->abbr != $requisicao["abbr"]){
+        $validator = \Validator::make($requisicao, [
+          'name' => 'required|string|max:100',
+          'abbr' => 'required|string|max:5|unique:type,abbr'
+        ], $messages);
+      }else{
+        $validator = \Validator::make($requisicao, [
+          'name' => 'required|string|max:100',
+        ], $messages);
+      }
       if($validator->fails()){
           return redirect()->back()->withErrors($validator->errors());
       }
       $type->name = $requisicao["name"];
+      $type->abbr = $requisicao["abbr"];
       $type->save();
       $messageBag = new MessageBag;
       $messageBag->add("alert","Modalidade atualizada com sucesso.");

@@ -68,6 +68,16 @@ Route::group(["prefix" => "type"],function () {
   Route::get('/delete/{id}', "TypeController@delete");
 });
 
+
+Route::group(["prefix" => "ratingtype"],function () { 
+  Route::get('/', "RatingTypeController@index");
+  Route::get('/new', "RatingTypeController@new");
+  Route::post('/new', "RatingTypeController@new_post");
+  Route::get('/edit/{id}', "RatingTypeController@edit");
+  Route::post('/edit/{id}', "RatingTypeController@edit_post");
+  Route::get('/delete/{id}', "RatingTypeController@delete");
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
