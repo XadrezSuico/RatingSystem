@@ -13,7 +13,15 @@ class CreateTournamentPersonTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tournamentPerson', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('person_id')->unsigned();
+            $table->foreign('person_id')->references('id')->on('person');
+            $table->integer('tournament_id')->unsigned();
+            $table->foreign('tournament_id')->references('id')->on('tournament');
+            $table->integer('modification');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateTournamentPersonTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ratingPerson');
     }
 }

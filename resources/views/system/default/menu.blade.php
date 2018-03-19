@@ -41,8 +41,8 @@
                     <span>Modalidades</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="blank.html">Nova Modalidade</a></li>
-                    <li><a href="login.html">Listar Modalidades</a></li>
+                    <li><a @if(isset($page) && isset($page[301])) class="active"@endif href="{{url("/type/new")}}">Nova Modalidade</a></li>
+                    <li><a @if(isset($page) && isset($page[302])) class="active"@endif href="{{url("/type")}}">Listar Modalidades</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

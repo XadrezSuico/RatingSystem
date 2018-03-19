@@ -13,7 +13,14 @@ class CreateRatingPersonTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('ratingPerson', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('person_id')->unsigned();
+            $table->foreign('person_id')->references('id')->on('person');
+            $table->integer('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('type');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class CreateRatingPersonTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ratingPerson');
     }
 }

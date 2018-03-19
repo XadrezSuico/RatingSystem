@@ -56,6 +56,18 @@ Route::group(["prefix" => "settings"],function () {
   });
 });
 
+
+
+
+Route::group(["prefix" => "type"],function () { 
+  Route::get('/', "TypeController@index");
+  Route::get('/new', "TypeController@new");
+  Route::post('/new', "TypeController@new_post");
+  Route::get('/edit/{id}', "TypeController@edit");
+  Route::post('/edit/{id}', "TypeController@edit_post");
+  Route::get('/delete/{id}', "TypeController@delete");
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
