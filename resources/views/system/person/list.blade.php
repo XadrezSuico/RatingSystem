@@ -1,15 +1,15 @@
-@php($page = array("2"=>true,"202"=>true))
-@extends("system.default.default")
-@section("title","Configurar >> Pessoas")
+@extends('adminlte::page')
+@section("title","Pessoas")
 @section("css")
-    <link href="{{url("/assets/css/table-responsive.css")}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{url("/assets/js/gritter/css/jquery.gritter.css")}}" />
     <style>
       td{
         vertical-align: middle !important;
       }
     </style>
-@endsection
+  @endsection
+  @section('content_header')
+      <h1>Pessoas</h1>
+  @stop
 @section("content")
 @if ($errors->has("alert"))
   <div class="row mt">
@@ -26,8 +26,8 @@
   </div>
 @endif
 <div class="row mt">
-  <div class="col-lg-12">
-    <div class="content-panel">
+  <div class="col-lg-12 connectedSortable">
+    <div class="box">
       <h4><i class="fa fa-angle-right"></i> Listar Pessoas</h4>
       <section id="no-more-tables">
         <table class="table table-bordered table-striped table-condensed cf">
@@ -39,30 +39,33 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($persons as $pessoa)
+            @foreach($persons as $person)
               <tr>
-                <td data-title="Código" class="numeric">{{$pessoa->id}}</td>
-                <td data-title="Nome">{{$pessoa->name}}</td>
-                <td data-title="Federação">{{$pessoa->federation->name}}</td>
+                <td data-title="Código" class="numeric">{{$person->id}}</td>
+                <td data-title="Nome">{{$person->firstname}} {{$person->lastname}}</td>
+                <td data-title="Federação">{{$person->federation->name}}</td>
                 <td data-title="Opções">
-    							<a class="btn btn-warning btn-sm" href="{{url("/ratingType/edit/".$type->id)}}">Editar</a>
-                  <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#lista_{{$type->id}}">
+    							<a class="btn btn-warning btn-sm" href="{{url("/person/edit/".$person->id)}}">Editar</a>
+                  <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#lista_{{$person->id}}">
       						  Excluir
       						</button>
       						<!-- Modal -->
-      						<div class="modal fade" id="lista_{{$type->id}}" tabindex="-1" role="dialog" aria-labelledby="listaLabel_{{$type->id}}" aria-hidden="true">
+      						<div class="modal fade" id="lista_{{$person->id}}" tabindex="-1" role="dialog" aria-labelledby="listaLabel_{{$person->id}}" aria-hidden="true">
       						  <div class="modal-dialog">
       						    <div class="modal-content">
       						      <div class="modal-header">
       						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      						        <h4 class="modal-title" id="listaLabel_{{$type->id}}">Deseja mesmo excluir o registro?</h4>
+      						        <h4 class="modal-title" id="listaLabel_{{$person->id}}">Deseja mesmo excluir o registro?</h4>
       						      </div>
       						      <div class="modal-body">
-                          Nome: {{$type->name}}
+                          Nome: {{$person->firstname}} {{$person->lastname}}<br/>
+                          Sexo: @if($person->sex == "M") Masculino @else Feminino @endif<br/>
+                          Data de Nascimento: {{$person->getBirthday()}}<br/>
+                          Federação: {{$person->federation->name}}<br/>
       						      </div>
       						      <div class="modal-footer">
       						        <button type="button" class="btn btn-success" data-dismiss="modal">Não quero</button>
-      						        <a href="{{url("/ratingType/delete/".$type->id)}}" class="btn btn-danger">Excluir</a>
+      						        <a href="{{url("/person/delete/".$person->id)}}" class="btn btn-danger">Excluir</a>
       						      </div>
       						    </div>
       						  </div>

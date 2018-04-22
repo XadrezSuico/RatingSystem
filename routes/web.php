@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('system.index');
+  return redirect("/home");
+});
+Route::get('/home', function () {
+  return view('system.index');
 });
 
 Route::group(["prefix" => "settings"],function () {
@@ -78,6 +81,14 @@ Route::group(["prefix" => "ratingtype"],function () {
   Route::get('/delete/{id}', "RatingTypeController@delete");
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(["prefix" => "person"],function () { 
+  Route::get('/', "PersonController@index");
+  Route::get('/new', "PersonController@new");
+  Route::post('/new', "PersonController@new_post");
+  Route::get('/edit/{id}', "PersonController@edit");
+  Route::post('/edit/{id}', "PersonController@edit_post");
+  Route::get('/delete/{id}', "PersonController@delete");
+});
+
+Auth::routes();

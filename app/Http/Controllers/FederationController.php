@@ -106,6 +106,6 @@ class FederationController extends Controller
       }
       $messageBag->add("alert","Erro inesperado. Por favor, tente novamente mais tarde.");
       $messageBag->add("type","warning");
-      return redirect()->back($messageBag);
+      return redirect()->back()->withErrors($messageBag);
     }
 }

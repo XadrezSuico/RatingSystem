@@ -42,7 +42,7 @@ class RatingTypeController extends Controller
         $type->save();
         $messageBag = new MessageBag;
         if($type->id > 0){
-          $messageBag->add("alert","Tipo de Rating cadastrada com sucesso.");
+          $messageBag->add("alert","Tipo de Rating cadastrado com sucesso.");
           $messageBag->add("type","success");
           return redirect("/ratingtype/edit/".$type->id)->withErrors($messageBag);
         }
@@ -80,7 +80,7 @@ class RatingTypeController extends Controller
         $type->name = $requisicao["name"];
         $type->save();
         $messageBag = new MessageBag;
-        $messageBag->add("alert","Tipo de Rating atualizada com sucesso.");
+        $messageBag->add("alert","Tipo de Rating atualizado com sucesso.");
         $messageBag->add("type","success");
         return redirect("/ratingtype/edit/".$type->id)->withErrors($messageBag);
       }
@@ -88,14 +88,14 @@ class RatingTypeController extends Controller
       public function delete($id){
         $modalidade = RatingType::find($id);
         $messageBag = new MessageBag;
-        if($federation){
+        if($modalidade){
           $modalidade->delete();
-          $messageBag->add("alert","Tipo de Rating deletada com sucesso.");
+          $messageBag->add("alert","Tipo de Rating deletado com sucesso.");
           $messageBag->add("type","success");
           return redirect("/ratingtype/")->withErrors($messageBag);
         }
         $messageBag->add("alert","Erro inesperado. Por favor, tente novamente mais tarde.");
         $messageBag->add("type","warning");
-        return redirect()->back($messageBag);
+        return redirect()->back()->withErrors($messageBag);
       }
 }

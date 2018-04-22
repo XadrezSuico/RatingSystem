@@ -102,7 +102,7 @@ class CityController extends Controller
       $messageBag = new MessageBag;
       if($city){
         $city->delete();
-        $messageBag->add("alert","Cidade deletads com sucesso.");
+        $messageBag->add("alert","Cidade deletada com sucesso.");
         $messageBag->add("type","success");
         return redirect("/settings/city/")->withErrors($messageBag);
       }
